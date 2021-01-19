@@ -5,3 +5,4 @@
 .project
 .classpath
 src/main/java/tech/sherrao/discord/ccubed/BotData.java
+target/
