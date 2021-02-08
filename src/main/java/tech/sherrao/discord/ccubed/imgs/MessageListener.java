@@ -4,13 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang.math.RandomUtils;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -68,6 +62,18 @@ public class MessageListener {
 	
 	@SubscribeEvent
 	public void onMessageSend(GuildMessageReceivedEvent event) {
+		TextChannel channel = event.getChannel();
+		if(channel.getId().equals(BotData.TEST_CHANNEL_ID) && event.getMessage().getContentRaw().toLowerCase().contains("!stop")) {
+			channel.sendMessage(":exclamation: Shutting down bot, check the linux screen instance to make sure there isn't an error.").complete();
+			bot.stop();
+			
+		}
+			
+	}
+	
+	/**
+	@SubscribeEvent
+	public void onMessageSend(GuildMessageReceivedEvent event) {
 		if(!event.getAuthor().isBot() && event.getChannel().getParent().getId().equals(BotData.STAFF_CATEGORY_ID)) {
 			String message = event.getMessage().getContentRaw();
 			TextChannel channel = event.getChannel();
@@ -92,5 +98,7 @@ public class MessageListener {
 			return;
 		
 	}
+	
+	*/
 	
 }
